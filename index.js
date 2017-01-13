@@ -18,7 +18,7 @@
  */
 var pribJSExtensions={};
 
-if(Object.prototype.definePropertyifNew)
+if(Object.prototype.defineFunction)
 	console.warning("Object.prototype.defineFunction already defined");
 else
 	Object.defineProperty(Object.prototype, "defineFunction", {
