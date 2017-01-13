@@ -24,59 +24,40 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 		  	,value: function(o,p,f) {
-		  			console.log("pribJSExtentions loading "+p+" for "+typeof o);
-		  			if(o.hasOwnProperty(p))
-		  				console.warning("Object.prototype."+p+" already defined for "+typeof o);
-		  			else
-		  				Object.defineProperty(o, p, {
-		  						enumerable: false
-		  						,value: f
-		  					});
-		  		}
-		  	});
+		  		console.log("pribJSExtentions loading "+p+" for "+typeof o);
+		  		if(o.hasOwnProperty(p))
+		  			console.warning("Object.prototype."+p+" already defined for "+typeof o);
+		  		else
+		  			Object.defineProperty(o, p, {
+		  					enumerable: false
+		  					,value: f
+		  				});
+		  	}
+		});
 
 Object.defineFunction(String,'startsWith',function () {
-			for (var i = 0; i < arguments.length; i++)
-				if(this.slice(0, arguments[i].length)==arguments[i]) return true;
-			return false;
+		for (var i = 0; i < arguments.length; i++)
+			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
+		return false;
 	});
-
-if(Array.prototype.getIterator)
-	console.log("Array.prototype.getIterator already defined");
-else
-	Object.defineProperty(Array.prototype, "getIterator", {
-			enumerable: false
-	  		,value:  function() {
-	  				var returnData = {array:this
-	  						,endOfList: function() {return this.key>=this.array.length;}
-	  						,getFirst: function() {this.key=0;}
-	  						,getLast: function() {this.key=this.array.length-1;}
-	  						,hasData: function() {return this.key<this.array.length;}
-	  						,hasNext: function() {return this.key+1<this.array.length;}
-	  						,key: -1
-					    	,next: function() {this.value=this.array[++this.key];}
-	  						,value: null
-				    	};
-	  				if (returnData.hasNext()) returnData.next();
-	  				return returnData; 
-				}
-	  		});
-if(Array.prototype.last)
-	console.log("Array.prototype.last already defined");
-else
-	Object.defineProperty(Array.prototype, "last", {
-			enumerable: false
-	  		,value:  function() {
-	  				if(this.length===0) 
-	  					return null;
-	  				return this[this.length - 1];
-	  			}
-	  		});
-if(global.DEBUG_LOG_2_CONSOLE) 
-	test.Management.add({description:"Array.prototype.last"
-		,tests:[ {script:"[1,2,3,4].last()" ,result:"4"}
-			,{script:"[].last()"		,result:null}
-		]});
+Object.defineFunction(Array, "getIterator", function() {
+		var returnData = {array:this
+				,endOfList: function() {return this.key>=this.array.length;}
+				,getFirst: function() {this.key=0;}
+				,getLast: function() {this.key=this.array.length-1;}
+				,hasData: function() {return this.key<this.array.length;}
+				,hasNext: function() {return this.key+1<this.array.length;}
+				,key: -1
+			    	,next: function() {this.value=this.array[++this.key];}
+	  			,value: null
+			    	};
+	  	if (returnData.hasNext()) returnData.next();
+	  		return returnData; 
+	});
+Object.defineFunction(Array, "last", function() {
+		if(this.length===0) return null;
+	  	return this[this.length - 1];
+	});
 if(Array.prototype.object2Table)
 	console.log("Array.prototype.object2Table already defined");
 else
