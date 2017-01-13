@@ -16,6 +16,31 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+var pribJSExtensions={};
+
+if(Object.prototype.definePropertyifNew)
+	console.warning("Object.prototype.defineFunction already defined");
+else
+	Object.defineProperty(Object.prototype, "defineFunction", {
+			enumerable: false
+		  	,value: function(o,p,f) {
+		  			console.log("pribJSExtentions loading "+p+" for "+typeof o);
+		  			if(o.hasOwnProperty(p))
+		  				console.warning("Object.prototype."+p+" already defined for "+typeof o);
+		  			else
+		  				Object.defineProperty(o, p, {
+		  						enumerable: false
+		  						,value: f
+		  					});
+		  		}
+		  	});
+
+Object.defineFunction(String,'startsWith',function () {
+			for (var i = 0; i < arguments.length; i++)
+				if(this.slice(0, arguments[i].length)==arguments[i]) return true;
+			return false;
+	});
+
 if(Array.prototype.getIterator)
 	console.log("Array.prototype.getIterator already defined");
 else
@@ -649,4 +674,27 @@ else
 							return "*** "+e.toString();
 						}
 		  		}
-		  	});	
+		  	});
+
+function setAllNodesClass(c,f,thisObject) {
+	console.log("setAllNodesClass: "+c);
+	if(c instanceof Array) {
+		for (var cc of c) setAllNodesClass(cc,f,thisObject);
+		return;
+	}
+	var f=f||this[c]||null;
+	if(f==null) return;
+	for(var ns = document.getElementsByClassName(c),nsl=ns.length,i=0;i<nsl;i++)
+		f.apply(thisObject||this,[ns[i]]);
+}
+pribJSExtensions.setAllNodesClass=setAllNodesClass;
+
+if (typeof define !== 'function') {
+    var define = require('amdefine')(pribJSExtensions);
+}
+define(function(require) {
+    //The value returned from the function is
+    //used as the module export visible to Node.
+    return pribJSExtensions;
+});
+
