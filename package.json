@@ -1,0 +1,5 @@
+{ "name": "pribJSExtensions"
+, "description": "Various improvements to base JS"
+,"version": "0.0.1"
+,main: "index.js"
+}
