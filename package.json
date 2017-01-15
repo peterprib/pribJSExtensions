@@ -9,9 +9,9 @@
  ,"keywords": [
     ,"javascript"
   ]
-,"author": "Peter Prib",
-,"bugs": "https://github.com/peterprib/pribJSExtensions/issues",
-, "license": "GPL-3.0",
+,"author": "Peter Prib"
+,"bugs": "https://github.com/peterprib/pribJSExtensions/issues"
+, "license": "GPL-3.0"
 , "bin": {
     "pribJSExtensions": "./index.js"
   }
