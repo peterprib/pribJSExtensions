@@ -2,4 +2,8 @@
 , "description": "Various improvements to base JS"
 ,"version": "0.0.1"
 ,"main": "index.js"
+,"repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/peterprib/pribJSExtensions.git"
+  }
 }
