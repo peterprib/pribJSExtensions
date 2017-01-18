@@ -170,6 +170,26 @@ Object.defineFunction(Object ,"hasAllProperties", function() {
 			if(!this.hasOwnProperty(arguments[i])) throw Error("missing "+arguments[i]);
 		 return true;
   	});
+Object.defineFunction(Object ,"inheritsProperties", function() {
+		for(var superFunction in arguments)
+			for(var property in superFunction)
+				if(!this.hasOwnProperty(property))
+					this[property]=superFunction[property];
+			for(var property in superFunction.prototype)
+				if(!this.prototype.hasOwnProperty(property))
+					this.prototype[property]=superFunction.prototype[property];
+
+		if(arguments.length=1)
+			this.super_ = arguments[0];
+		else {
+			this.super_functions=[];
+			for(var i=1;i<arguments.length;i++) this.super_functions.push(i); 
+			this.super_ = function() {
+				for(var i=1;i<arguments.length;i++) this.super_functions[i].apply(this, [arguments])
+			}
+		}
+});
+
 Object.defineFunction(Object ,"isEmpty", function() {
 		for (var p in this) 
 			if(this.hasOwnProperty(p)) return false;
