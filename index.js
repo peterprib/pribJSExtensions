@@ -18,7 +18,8 @@
  * 
  */
 var pribJSExtensions={};
-
+if(!console.warning)
+	console.prototype.warning=console.error;
 if(Object.prototype.defineFunction)
 	console.warning("Object.prototype.defineFunction already defined");
 else
@@ -376,7 +377,7 @@ Object.defineFunction(Object,"toJsonString", function(depth,nodes) {
 function setAllNodesClass(c,f,thisObject) {
 	console.log("setAllNodesClass: "+c);
 	if(c instanceof Array) {
-		for (var cc of c) setAllNodesClass(cc,f,thisObject);
+		for (var cc in c) setAllNodesClass(cc,f,thisObject);
 		return;
 	}
 	f=f||this[c]||null;
