@@ -20,7 +20,9 @@
 var pribJSExtensions={};
 if(Object.prototype.defineFunction)
 	console.warn("Object.prototype.defineFunction already defined");
-else
+else {
+	if(String.prototype.defineFunction)
+		console.warn("String.prototype.defineFunction being overrridden");
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
@@ -34,11 +36,13 @@ else
 							});
 				}
 		});
-Object.defineFunction(String,"startsWith",function () {
-		for (var i = 0; i < arguments.length; i++)
-			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
-		return false;
-	});
+	String.prototype.defineFunction = function(p,f) { 
+			console.log("pribJSExtentions loading "+p+" for "+typeof o);
+			if(String.prototype.hasOwnProperty(p))
+				console.warn("String.prototype."+p+" already defined");
+			String.prototype[p]=f;
+		};
+}
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
 				,endOfList: function() {return this.key>=this.array.length;}
@@ -237,15 +241,7 @@ Object.defineFunction(Object ,"toSimpleArray", function(prefix) {
 				o.push([(prefix||"")+p,this[p],typeof this[p]]);
 		 return o;
 	});
-if(String.prototype.defineFunction)
-	console.warn("String.prototype.defineFunction already defined");
-else
-	String.prototype.defineFunction = function(p,f) { 
-			console.log("pribJSExtentions loading "+p+" for "+typeof o);
-			if(String.prototype.hasOwnProperty(p))
-				console.warn("String.prototype."+p+" already defined");
-			String.prototype[p]=f;
-		};
+
 String.defineFunction("addSlashes",function() { 
 		return this.replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0");
 	});
@@ -307,11 +303,11 @@ String.defineFunction("replaceAll",function(a,b) {
 		return this.replace(a,b,"g");
 	});
 String.defineFunction("startsWith",String.prototype.startsWithList);
-String.defineFunction("startsWithList",function () {
-		for (var i = 0; i < arguments.length; i++)
-			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
-		return false;
-	});
+//String.defineFunction("startsWithList",function () {
+//		for (var i = 0; i < arguments.length; i++)
+//			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
+//		return false;
+//	});
 String.defineFunction("startsWithListAnyCase",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.slice(0, arguments[i].length).toLowerCase()==arguments[i].toLowerCase()) return true;
