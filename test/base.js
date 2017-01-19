@@ -3,8 +3,9 @@ var chai = require("chai");
 var expect = chai.expect;
 var assert = chai.assert;
 var should = chai.should;
-/*
+
 var jsPribExtensions = require("../index");
+/*
 describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("load successfully", function() {
