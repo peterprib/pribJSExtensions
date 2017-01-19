@@ -1,4 +1,4 @@
-/*eslint-env browser, amd*/
+/*eslint-env browser, amd, node*/
 
 /*
  * Copyright (C) 2016 Jaroslav Peter Prib
@@ -381,13 +381,16 @@ function setAllNodesClass(c,f,thisObject) {
 		f.apply(thisObject||this,[ns[i]]);
 }
 pribJSExtensions.setAllNodesClass=setAllNodesClass;
-
-if (typeof define !== "function") {
-    var define = require("amdefine")(pribJSExtensions);
-}
-define(/* @callback */ function(require) {
+try{
+	if (typeof define !== "function") {
+		var define = require("amdefine")(pribJSExtensions);
+	}
+	define(/* @callback */ function(require) {
     //The value returned from the function is
     //used as the module export visible to Node.
-    return pribJSExtensions;
-});
+			return pribJSExtensions;
+		});
+} catch(e) {
+	module.exports = pribJSExtensions;
+}
 
