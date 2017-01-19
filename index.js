@@ -19,7 +19,7 @@
  */
 var pribJSExtensions={};
 if(!console.warning)
-	console.prototype.warning=console.error;
+	console.prototype.warning=console.prototype.error;
 if(Object.prototype.defineFunction)
 	console.warning("Object.prototype.defineFunction already defined");
 else
