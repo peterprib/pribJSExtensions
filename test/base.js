@@ -1,16 +1,20 @@
 /*eslint-env node, assert, mocha, mocha*/
-/*
-try{
-	require("../index");
-	var requireLoad=true;
-} catch(e) {
-}
-*/
-var assert = require("assert");
+var chai = require("chai");
+var expect = chai.expect;
+var assert = chai.assert;
+var should = chai.should;
+
+
+var jsPribExtensions = require("../index");
+
 describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("load successfully", function() {
-						assert.equal(true, true);
+						should.exist(jsPribExtensions);
+						expect("atest".startWith("a")).to.equal(true);
+						"atest".startWith("at").should.be.equal.to(true);
+						expect("atest".startWith("ad")).to.equal(false);
+						assert.typeOf("atest".startWith("ad"), "string", " test type");
 					});
 		});
 	});
