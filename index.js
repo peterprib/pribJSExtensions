@@ -20,9 +20,7 @@
 var pribJSExtensions={};
 if(Object.prototype.defineFunction)
 	console.warn("Object.prototype.defineFunction already defined");
-else {
-	if(String.prototype.defineFunction)
-		console.warn("String.prototype.defineFunction being overrridden");
+else 
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
@@ -36,13 +34,16 @@ else {
 							});
 				}
 		});
-	String.prototype.defineFunction = function(p,f) { 
+if(Object.prototype.defineFunctionString)
+	console.warn("String.prototype.defineFunctionString already defined");
+else
+	Object.prototype.defineFunctionString = function(p,f) { 
 			console.log("pribJSExtentions loading "+p+" for "+typeof o);
 			if(String.prototype.hasOwnProperty(p))
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
-}
+
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
 				,endOfList: function() {return this.key>=this.array.length;}
@@ -242,25 +243,25 @@ Object.defineFunction(Object ,"toSimpleArray", function(prefix) {
 		 return o;
 	});
 
-String.defineFunction("addSlashes",function() { 
+String.defineFunctionString("addSlashes",function() { 
 		return this.replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0");
 	});
-String.defineFunction("capitalize",function() {
+String.defineFunctionString("capitalize",function() {
 		return this.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
 	});
-String.defineFunction("endsWithList",function () {
+String.defineFunctionString("endsWithList",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.substr(-arguments[i].length)==arguments[i]) return true;
 		return false;
 	});
-String.defineFunction("endsWith",String.prototype.endsWithList);
+String.defineFunctionString("endsWith",String.prototype.endsWithList);
 
-String.defineFunction("endsWithListAnyCase",function () {
+String.defineFunctionString("endsWithListAnyCase",function () {
 		for (var i=0; i<arguments.length; i++)
 			if(this.substr(-arguments[i].length).toLowerCase()===arguments[i].toLowerCase()) return true;
 		return false;
 	});
-String.defineFunction("inList",function () {
+String.defineFunctionString("inList",function () {
 		var thisString=this.toString(), argValue;
 		for (var i=0; i<arguments.length; i++) {
 			argValue=arguments[i];
@@ -272,7 +273,7 @@ String.defineFunction("inList",function () {
 		}
 		return false;
 	});
-String.defineFunction("inListAnyCase",function () {
+String.defineFunctionString("inListAnyCase",function () {
 		var thisLower=this.toString().toLowerCase(), argValue;
 		for (var i=0; i<arguments.length; i++) {
 			argValue=arguments[i];
@@ -284,7 +285,7 @@ String.defineFunction("inListAnyCase",function () {
 		}
 		return false;
 	});
-String.defineFunction("inListLowerCase",function () {
+String.defineFunctionString("inListLowerCase",function () {
 		var thisLower=this.toString().toLowerCase(), argValue;
 		for (var i=0; i<arguments.length; i++) {
 			argValue=arguments[i];
@@ -296,24 +297,24 @@ String.defineFunction("inListLowerCase",function () {
 		}
 		return false;
 	});
-String.defineFunction("maxSize",function (max) {
+String.defineFunctionString("maxSize",function (max) {
 		return this.substring(0,Math.min(max,this.length));
 	});
-String.defineFunction("replaceAll",function(a,b) {
+String.defineFunctionString("replaceAll",function(a,b) {
 		return this.replace(a,b,"g");
 	});
-String.defineFunction("startsWith",String.prototype.startsWithList);
-//String.defineFunction("startsWithList",function () {
+String.defineFunctionString("startsWith",String.prototype.startsWithList);
+//String.defineFunctionString("startsWithList",function () {
 //		for (var i = 0; i < arguments.length; i++)
 //			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
 //		return false;
 //	});
-String.defineFunction("startsWithListAnyCase",function () {
+String.defineFunctionString("startsWithListAnyCase",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.slice(0, arguments[i].length).toLowerCase()==arguments[i].toLowerCase()) return true;
 		return false;
 	});
-String.defineFunction("trimChar",function(char) {
+String.defineFunctionString("trimChar",function(char) {
 		if(this.charAt(0)!=char && this.charAt(0)!=char) return this;
 		var o=this;
 		while (o.charAt(0)==char && o.length>0) 
@@ -322,7 +323,7 @@ String.defineFunction("trimChar",function(char) {
 			o=this.substring(0,o.length-1);
 		return o;
 	});
-String.defineFunction("toQuoted",function() {
+String.defineFunctionString("toQuoted",function() {
 		var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g
 			,meta = {"\b":"\\b","\t":"\\t","\n": "\\n","\f": "\\f","\r": "\\r","\"" : "\\\"","\\": "\\\\"};
 		escapable.lastIndex = 0;
