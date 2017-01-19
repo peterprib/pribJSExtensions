@@ -18,17 +18,15 @@
  * 
  */
 var pribJSExtensions={};
-if(!console.warning)
-	console.prototype.warning=console.prototype.error;
 if(Object.prototype.defineFunction)
-	console.warning("Object.prototype.defineFunction already defined");
+	console.warn("Object.prototype.defineFunction already defined");
 else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
 					console.log("pribJSExtentions loading "+p+" for "+typeof o);
 					if(o.hasOwnProperty(p))
-						console.warning("Object.prototype."+p+" already defined for "+typeof o);
+						console.warn("Object.prototype."+p+" already defined for "+typeof o);
 					else
 						Object.defineProperty(o, p, {
 								enumerable: false
@@ -109,7 +107,7 @@ Object.defineFunction(Object ,"addPropertyByObjectProperty", function(p,o) {
 Object.defineFunction(Object ,"clone", function() {
 		if(this instanceof String) return new String(this);  
 		if(this instanceof Number) return new Number(this);  
-		if(this instanceof Date)return new Date(this);
+		if(this instanceof Date) return new Date(this);
 		if(this instanceof Array) var newObj=[];
 		else if(typeof this == "object") var newObj={};
 		else return this;
@@ -240,12 +238,12 @@ Object.defineFunction(Object ,"toSimpleArray", function(prefix) {
 		 return o;
 	});
 if(String.prototype.defineFunction)
-	console.warning("String.prototype.defineFunction already defined");
+	console.warn("String.prototype.defineFunction already defined");
 else
 	String.prototype.defineFunction = function(p,f) { 
 			console.log("pribJSExtentions loading "+p+" for "+typeof o);
 			if(String.prototype.hasOwnProperty(p))
-				console.warning("String.prototype."+p+" already defined");
+				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
 String.defineFunction("addSlashes",function() { 
