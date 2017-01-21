@@ -38,7 +38,7 @@ if(Object.prototype.defineFunctionString)
 	console.warn("String.prototype.defineFunctionString already defined");
 else
 	Object.prototype.defineFunctionString = function(p,f) { 
-			console.log("pribJSExtentions loading "+p+" for "+typeof o);
+			console.log("pribJSExtentions loading "+p+" for string");
 			if(String.prototype.hasOwnProperty(p))
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;

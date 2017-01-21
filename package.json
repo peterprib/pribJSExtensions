@@ -15,4 +15,11 @@
 , "bin": {
     "pribJSExtensions": "./index.js"
   }
+,  "scripts": {
+    "test": "./node_modules/.bin/mocha -R xunit  --reporter-options output=tests/TEST-1.xml"
+  }
+,"devDependencies": {
+    "mocha": "*"
+    ,"chai": "*"
+  }
 }
