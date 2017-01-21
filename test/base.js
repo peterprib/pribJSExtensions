@@ -3,7 +3,26 @@ var chai = require("chai");
 var expect = chai.expect;
 var assert = chai.assert;
 var should = chai.should;
+
+var propsArray=Object.getOwnPropertyNames(Array).sort();
+var propsObject=Object.getOwnPropertyNames(Object).sort();
+var propsString=Object.getOwnPropertyNames(String).sort();
+console.log("Array properties: "+propsArray);
+console.log("Object properties: "+propsObject);
+console.log("String properties: "+propsString);
 var jsPribExtensions = require("../index");
+var propsArrayAfter=Object.getOwnPropertyNames(Array).sort();
+var propsObjectAfter=Object.getOwnPropertyNames(Object).sort();
+var propsStringAfter=Object.getOwnPropertyNames(String).sort();
+console.log("Array properties: "+propsArrayAfter);
+console.log("Object properties: "+propsObjectAfter);
+console.log("String properties: "+propsStringAfter);
+
+console.log("Array diff: "+propsArray.diff(propsArrayAfter));
+console.log("Object diff: "+propsObject.diff(propsObjectAfter));
+console.log("String diff: "+propsString.diff(propsStringAfter));
+
+
 describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("load successfully", function() {

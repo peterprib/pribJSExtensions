@@ -43,6 +43,13 @@ else
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
+Object.defineFunction(Array, "diff", function() {
+		for (var r=this,a, i=0; i<arguments.length; i++) {
+			a=arguments[i];
+			r=r.filter(function(i) {return a.indexOf(i) < 0;});
+		}
+		return r;
+	});
 
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
