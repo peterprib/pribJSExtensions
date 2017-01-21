@@ -7,11 +7,13 @@ var jsPribExtensions = require("../index");
 describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("load successfully", function() {
-						should.exist(jsPribExtensions);
-						expect("atest".startWith("a")).to.equal(true);
-						"atest".startWith("at").should.be.equal.to(true);
-						expect("atest".startWith("ad")).to.equal(false);
-						assert.typeOf("atest".startWith("ad"), "string", " test type");
+						should.exist(jsPribExtensions,"jsPribExtensions not defined");
+					});
+				it("String startWith", function() {
+						assert.typeOf("atest".startWith("ad"), "boolean", "boolean type not returned");
+						expect("atest".startWith("a")).to.equal(true,"can't handle single char");
+						"atest".startWith("at").should.be.equal.to(true,"can't handle multi char");
+						expect("atest".startWith("ad")).to.equal(false,"can't false");
 					});
 		});
 	});
