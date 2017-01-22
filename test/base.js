@@ -19,6 +19,7 @@ console.log("Object properties: "+propsObjectAfter);
 console.log("String properties: "+propsStringAfter);
 
 console.log("Array diff: "+propsArrayAfter.outerSet(propsArray));
+console.log("Array diff: "+propsArray.outerSet(propsArrayAfter));
 console.log("Object diff: "+propsObjectAfter.outerSet(propsObject));
 console.log("String diff: "+propsStringAfter.outerSet(propsString));
 
@@ -27,6 +28,14 @@ describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("load successfully", function() {
 						should.exist(jsPribExtensions,"jsPribExtensions not defined");
+					});
+				it("Array outerSet", function() {
+						assert.typeOf([].outerSet([]), "Array", "Array type not returned");
+						[].outerSet([]).should.be.equal.to([],"can't handle empty arras");
+						[1].outerSet([]).should.be.equal.to([1],"can't handle diff");
+						[1].outerSet([1,2]).should.be.equal.to([2],"can't handle diff");
+						[1,2].outerSet([1]).should.be.equal.to([2],"can't handle diff");
+						[1,2].outerSet([1],[3]).should.be.equal.to([2,3],"can't handle diff");
 					});
 				it("String startWith", function() {
 						assert.typeOf("atest".startWith("ad"), "boolean", "boolean type not returned");

@@ -24,9 +24,9 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
-					console.log("pribJSExtentions loading "+p+" for "+o.constructor );
+					console.log("pribJSExtentions loading "+p+" for "+o.prototype.constructor );
 					if(o.hasOwnProperty(p))
-						console.warn("Object.prototype."+p+" already defined for "+o.constructor);
+						console.warn("Object.prototype."+p+" already defined for "+o.prototype.constructor);
 					else
 						Object.defineProperty(o.prototype, p, {
 								enumerable: false
@@ -43,7 +43,7 @@ else
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
-
+console.log("pribJSExtentions defining Array extensions");
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
 				,endOfList: function() {return this.key>=this.array.length;}
@@ -102,6 +102,7 @@ Object.defineFunction(Array ,"toRatios", function() {
 		for(var o=[], t=this.sum(), i=0;i<this.length;i++) o[i]=this[i]/t;
 		return o;
 	});
+console.log("pribJSExtentions defining Date extensions");
 Object.defineFunction(Date ,"timeDuration" ,{
 	second : 1000
 	,minute : 1000*60
@@ -111,6 +112,7 @@ Object.defineFunction(Date ,"timeDuration" ,{
 Object.defineFunction(Date ,"days" ,function(toData) {
 		return Math.abs(Math.floor(toData.getTime()/Date.timeDuration.day) -  Math.floor(this.getTime()/Date.timeDuration.day));
 	});
+console.log("pribJSExtentions defining Object extensions");
 Object.defineFunction(Object ,"addPropertyByObjectProperty", function(p,o) {
 		if(o==null) return;
 		this[o[p]]=o;
@@ -248,7 +250,7 @@ Object.defineFunction(Object ,"toSimpleArray", function(prefix) {
 				o.push([(prefix||"")+p,this[p],typeof this[p]]);
 		 return o;
 	});
-
+console.log("pribJSExtentions defining String extensions");
 String.defineFunctionString("addSlashes",function() { 
 		return this.replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0");
 	});
