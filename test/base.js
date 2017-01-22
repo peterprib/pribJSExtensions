@@ -18,9 +18,9 @@ console.log("Array properties: "+propsArrayAfter);
 console.log("Object properties: "+propsObjectAfter);
 console.log("String properties: "+propsStringAfter);
 
-console.log("Array diff: "+propsArray.diff(propsArrayAfter));
-console.log("Object diff: "+propsObject.diff(propsObjectAfter));
-console.log("String diff: "+propsString.diff(propsStringAfter));
+console.log("Array diff: "+propsArrayAfter.outerSet(propsArray));
+console.log("Object diff: "+propsObjectAfter.outerSet(propsObject));
+console.log("String diff: "+propsStringAfter.outerSet(propsString));
 
 
 describe("jsPribExtensions", function() {

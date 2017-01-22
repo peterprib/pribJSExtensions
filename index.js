@@ -43,13 +43,6 @@ else
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
-Object.defineFunction(Array, "diff", function() {
-		for (var r=this,a, i=0; i<arguments.length; i++) {
-			a=arguments[i];
-			r=r.filter(function(i) {return a.indexOf(i) < 0;});
-		}
-		return r;
-	});
 
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
@@ -67,6 +60,12 @@ Object.defineFunction(Array, "getIterator", function() {
 	});
 Object.defineFunction(Array, "last", function() {
 		return this.length===0?null:this[this.length - 1];
+	});
+Object.defineFunction(Array, "outerSet", function() {
+		for (var t=this ,s=[] ,i=0; i<arguments.length; i++)
+			s=s.concat(arguments[i]);
+		var r=t.filter(function(i) {return s.indexOf(i) < 0;});
+		return r.concat(s.filter(function(i) {return t.indexOf(i) < 0;}));
 	});
 Object.defineFunction(Array ,"pushArray", function(a) {
 		if(a instanceof Array ) 
