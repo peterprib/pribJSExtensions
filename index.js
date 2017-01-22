@@ -24,9 +24,9 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
-					console.log("pribJSExtentions loading "+p+" for "+o.prototype.constructor );
+					console.log("pribJSExtentions loading "+p );
 					if(o.hasOwnProperty(p))
-						console.warn("Object.prototype."+p+" already defined for "+o.prototype.constructor);
+						console.warn("Object.prototype."+p+" already defined");
 					else
 						Object.defineProperty(o.prototype, p, {
 								enumerable: false
@@ -64,8 +64,11 @@ Object.defineFunction(Array, "last", function() {
 Object.defineFunction(Array, "outerSet", function() {
 		for (var t=this ,s=[] ,i=0; i<arguments.length; i++)
 			s=s.concat(arguments[i]);
-		var r=t.filter(function(i) {return s.indexOf(i) < 0;});
-		return r.concat(s.filter(function(i) {return t.indexOf(i) < 0;}));
+		var o=t.filter(function(i) {return s.indexOf(i) < 0;});
+		console.log("interim result: "+o);
+		o=o.concat(s.filter(function(i) {return t.indexOf(i) < 0;}));
+		console.log("source : "+s+"\ntartget:"+t+"\nResult: "+o);
+		return o;
 	});
 Object.defineFunction(Array ,"pushArray", function(a) {
 		if(a instanceof Array ) 
