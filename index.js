@@ -120,15 +120,12 @@ Object.defineFunction(Object ,"addPropertyByObjectProperty", function(p,o) {
 		if(o==null) return;
 		this[o[p]]=o;
 	});
-	
-Object.defineFunction(Object ,"getFunctionName", function() {	
+Object.defineFunction(Object ,"getConstructorName", function() {	
 		return Object.prototype.toString.call(this).match(/^\[object\s(.*)\]$/)[1];
 	});
-Object.defineFunction(Object ,"getConstructorName", function() {	
-		return Objreturn this.name;
+Object.defineFunction(Object ,"getFunctionName", function() {	
+		return this.name;
 	});
-
-	
 Object.defineFunction(Object ,"clone", function() {
 		if(this instanceof String) return new String(this);  
 		if(this instanceof Number) return new Number(this);  
