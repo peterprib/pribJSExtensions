@@ -24,9 +24,9 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
-					console.log("pribJSExtentions loading "+p );
+					console.log("pribJSExtentions loading "+p+" for "+o.name );
 					if(o.hasOwnProperty(p))
-						console.warn("Object.prototype."+p+" already defined");
+						console.warn("Object.prototype."+p+" already defined for "+o.name);
 					else
 						Object.defineProperty(o.prototype, p, {
 								enumerable: false
@@ -120,6 +120,15 @@ Object.defineFunction(Object ,"addPropertyByObjectProperty", function(p,o) {
 		if(o==null) return;
 		this[o[p]]=o;
 	});
+	
+Object.defineFunction(Object ,"getFunctionName", function() {	
+		return Object.prototype.toString.call(this).match(/^\[object\s(.*)\]$/)[1];
+	});
+Object.defineFunction(Object ,"getConstructorName", function() {	
+		return Objreturn this.name;
+	});
+
+	
 Object.defineFunction(Object ,"clone", function() {
 		if(this instanceof String) return new String(this);  
 		if(this instanceof Number) return new Number(this);  
