@@ -31,7 +31,7 @@ describe("jsPribExtensions", function() {
 		describe("require loaded", function() {
 				it("Array outerSet", function() {
 						assert.typeOf([].outerSet([]), "Array", "Array type not returned");
-						[].outerSet([]).should.be.equal.to([],"can't handle empty arras");
+						[].outerSet([]).should.equal([],"can't handle empty arras");
 						[1].outerSet([]).should.be.equal.to([1],"can't handle diff");
 						[1].outerSet([1,2]).should.be.equal.to([2],"can't handle diff");
 						[1,2].outerSet([1]).should.be.equal.to([2],"can't handle diff");
