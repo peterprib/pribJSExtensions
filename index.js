@@ -24,11 +24,11 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
-					console.log("pribJSExtentions loading "+p+" for "+typeof o);
+					console.log("pribJSExtentions loading "+p+" for "+o.constructor );
 					if(o.hasOwnProperty(p))
-						console.warn("Object.prototype."+p+" already defined for "+typeof o);
+						console.warn("Object.prototype."+p+" already defined for "+o.constructor);
 					else
-						Object.defineProperty(o, p, {
+						Object.defineProperty(o.prototype, p, {
 								enumerable: false
 								,value: f
 							});
