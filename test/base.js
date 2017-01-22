@@ -28,20 +28,20 @@ console.log("String diff: "+propsStringAfter.outerSet(propsString));
 
 
 describe("jsPribExtensions", function() {
-		describe("require loaded", function() {
+//		describe("require loaded", function() {
 				it("Array outerSet", function() {
 						assert.typeOf([].outerSet([]), "Array", "Array type not returned");
-						[].outerSet([]).should.equal([],"can't handle empty arras");
-						[1].outerSet([]).should.be.equal.to([1],"can't handle diff");
-						[1].outerSet([1,2]).should.be.equal.to([2],"can't handle diff");
-						[1,2].outerSet([1]).should.be.equal.to([2],"can't handle diff");
-						[1,2].outerSet([1],[3]).should.be.equal.to([2,3],"can't handle diff");
+						expect( [].outerSet([]) ).to.equal( [] ,"can't handle empty arras");
+						expect( [1].outerSet([]) ).to.equal( [1] ,"can't handle diff");
+						expect( [1].outerSet([1,2]) ).to.equal( [2] ,"can't handle diff");
+						expect( [1,2].outerSet([1]) ).to.equal( [2] ,"can't handle diff");
+						expect( [1,2].outerSet([1],[3]) ).to.equal( [2,3] ,"can't handle diff");
 					});
 				it("String startWith", function() {
 						assert.typeOf("atest".startWith("ad"), "boolean", "boolean type not returned");
-						expect("atest".startWith("a")).to.equal(true,"can't handle single char");
-						"atest".startWith("at").should.be.equal.to(true,"can't handle multi char");
-						expect("atest".startWith("ad")).to.equal(false,"can't false");
+						expect( "atest".startWith("a") ).to.equal(true,"can't handle single char");
+						expect( "atest".startWith("at") ).to.equal(true,"can't handle multi char");
+						expect( "atest".startWith("ad") ).to.equal(false,"can't false");
 					});
-		});
+//		});
 	});
