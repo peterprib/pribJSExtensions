@@ -1,22 +1,31 @@
 /*eslint-env node, assert, mocha*/
+
 var chai = require("chai");
 var expect = chai.expect;
 var assert = chai.assert;
-var should = chai.should;
+var should = chai.should();
+
 					console.log("assert " +Object.getOwnPropertyNames(assert).sort());
 					console.log("expect " +Object.getOwnPropertyNames(expect).sort());
-					console.log("expect " +Object.getOwnPropertyNames(should).sort());
+					console.log("should() " +Object.getOwnPropertyNames(should).sort());
 	
 
 
 var propsArray=Object.getOwnPropertyNames([]).sort();
 var propsObject=Object.getOwnPropertyNames({}).sort();
-var propsString=Object.getOwnPropertyNames("").sort();
+var propsString=Object.getOwnPropertyNames(new String("a")).sort();
+
 console.log("Array properties: "+propsArray);
 console.log("Object properties: "+propsObject);
 console.log("String properties: "+propsString);
 
+console.log("\nFirst require");
 require("../index");
+console.log("\nSecond Require");
+require("../index");
+console.log("\nRequire end\n");
+
+
 
 var propsArrayAfter=Object.getOwnPropertyNames([]).sort();
 var propsObjectAfter=Object.getOwnPropertyNames({}).sort();
@@ -36,7 +45,6 @@ describe("jsPribExtensions", function() {
 			it("Array outerSet", function() {
 					console.log("assert " +Object.getOwnPropertyNames(assert).sort());
 					console.log("expect " +Object.getOwnPropertyNames(expect).sort());
-				
 				
 					assert.typeOf([].outerSet([]), "Array", "Array type not returned");
 					
