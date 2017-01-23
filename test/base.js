@@ -19,9 +19,7 @@ console.log("Array properties: "+propsArray);
 console.log("Object properties: "+propsObject);
 console.log("String properties: "+propsString);
 
-console.log("\nFirst require");
-require("../index");
-console.log("\nSecond Require");
+console.log("\nRequire");
 require("../index");
 console.log("\nRequire end\n");
 
@@ -29,7 +27,7 @@ console.log("\nRequire end\n");
 
 var propsArrayAfter=Object.getOwnPropertyNames([]).sort();
 var propsObjectAfter=Object.getOwnPropertyNames({}).sort();
-var propsStringAfter=Object.getOwnPropertyNames("").sort();
+var propsStringAfter=Object.getOwnPropertyNames(new String("a")).sort();
 
 console.log("Array properties: "+propsArrayAfter);
 console.log("Object properties: "+propsObjectAfter);
@@ -45,10 +43,11 @@ describe("jsPribExtensions", function() {
 			it("Array outerSet", function() {
 					console.log("assert " +Object.getOwnPropertyNames(assert).sort());
 					console.log("expect " +Object.getOwnPropertyNames(expect).sort());
-				
-					assert.typeOf([].outerSet([]), "Array", "Array type not returned");
+					var o=[].outerSet([]);
+					should.exist(o,"");
+					assert.typeOf(o, "Array", "Array type not returned");
 					
-					expect( [].outerSet([]) ).to.equal( [] ,"can't handle empty arras");
+					expect( o ).to.equal( [] ,"can't handle empty arrays");
 					expect( [1].outerSet([]) ).to.equal( [1] ,"can't handle diff");
 					expect( [1].outerSet([1,2]) ).to.equal( [2] ,"can't handle diff");
 					expect( [1,2].outerSet([1]) ).to.equal( [2] ,"can't handle diff");
