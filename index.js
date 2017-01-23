@@ -322,25 +322,22 @@ String.defineFunctionString("maxSize",function (max) {
 String.defineFunctionString("replaceAll",function(a,b) {
 		return this.replace(a,b,"g");
 	});
+String.defineFunctionString("startsWithList",function () {
+		for (var i = 0; i < arguments.length; i++)
+			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
+		return false;
+	});
 String.defineFunctionString("startsWith",String.prototype.startsWithList);
-//String.defineFunctionString("startsWithList",function () {
-//		for (var i = 0; i < arguments.length; i++)
-//			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
-//		return false;
-//	});
 String.defineFunctionString("startsWithListAnyCase",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.slice(0, arguments[i].length).toLowerCase()==arguments[i].toLowerCase()) return true;
 		return false;
 	});
+String.defineFunctionString("startsWithAnyCase",String.prototype.startsWithListAnyCase);
 String.defineFunctionString("trimChar",function(char) {
-		if(this.charAt(0)!=char && this.charAt(0)!=char) return this;
-		var o=this;
-		while (o.charAt(0)==char && o.length>0) 
-			o=this.substring(1);
-		while (o.charAt(o.length-1)==char && o.length>0) 
-			o=this.substring(0,o.length-1);
-		return o;
+		for(var i=0;i<this.length && this.charAt(i)==char;i++) continue;
+		for(var j=this.length;i>0 && this.charAt(j)==char;j++) continue;
+		return this.substring(i,j);
 	});
 String.defineFunctionString("toQuoted",function() {
 		var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g
