@@ -20,7 +20,7 @@ describe("jsPribExtensions created base functions and extended objects", functio
 					expect( [1,2].outerSet([1],[3]) ).to.deep.equal( [2,3] ,"can't handle multlie compare arrays");
 				});
 			it("String startWith", function() {
-					var s= "atest";
+					var s= new String("atest");
 					assert.typeOf(s.startsWith("ad"), "boolean", "boolean type not returned");
 					expect( s.startsWith("a") ).to.equal(true,"can't handle single char");
 					expect( s.startsWith("at") ).to.equal(true,"can't handle multi char");
