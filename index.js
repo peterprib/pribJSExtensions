@@ -58,6 +58,11 @@ Object.defineFunction(Array, "getIterator", function() {
 		if (returnData.hasNext()) returnData.next();
 			return returnData; 
 	});
+Object.defineFunction(Array, "innerSet", function() {
+		for (var s=[] ,i=0; i<arguments.length; i++)
+			s=s.concat(arguments[i]);
+		return this.filter(function(i) {return s.indexOf(i) >= 0;});
+	});
 Object.defineFunction(Array, "last", function() {
 		return this.length===0?null:this[this.length - 1];
 	});
@@ -65,10 +70,7 @@ Object.defineFunction(Array, "outerSet", function() {
 		for (var t=this ,s=[] ,i=0; i<arguments.length; i++)
 			s=s.concat(arguments[i]);
 		var o=t.filter(function(i) {return s.indexOf(i) < 0;});
-		console.log("interim result: "+o);
-		o=o.concat(s.filter(function(i) {return t.indexOf(i) < 0;}));
-		console.log("source : "+s+"\ntartget:"+t+"\nResult: "+o);
-		return o;
+		return o.concat(s.filter(function(i) {return t.indexOf(i) < 0;}));
 	});
 Object.defineFunction(Array ,"pushArray", function(a) {
 		if(a instanceof Array ) 
