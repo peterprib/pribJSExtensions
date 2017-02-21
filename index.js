@@ -44,6 +44,23 @@ else
 			String.prototype[p]=f;
 		};
 console.log("pribJSExtentions defining Array extensions");
+Object.defineFunction(Array, "areEqual", function(l,r,t,f,o) {
+		var a = (this[l]==this[r]);
+		if(t) {
+			if(a===true)
+				t.apply(o, [l,r]);
+		} else if(f) {
+			if(a===false)
+				f.apply(o, [l,r]);
+		}
+		return a;
+	});
+Object.defineFunction(Array, "diffCells", function() {
+		for (var l,r,i=1; i<arguments.length; i++) {
+			if(!this.areEqual(arguments[i-1],arguments[i])===true)
+				console.log("difference: "+ arguments[i-1] + " " + arguments[i] + " " + JSON.stringify(this));
+		}
+	});
 Object.defineFunction(Array, "getIterator", function() {
 		var returnData = {array:this
 				,endOfList: function() {return this.key>=this.array.length;}
