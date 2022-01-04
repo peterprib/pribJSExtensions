@@ -351,9 +351,6 @@ String.defineFunctionString("inListLowerCase",function () {
 String.defineFunctionString("maxSize",function (max) {
 		return this.substring(0,Math.min(max,this.length));
 	});
-String.defineFunctionString("replaceAll",function(a,b) {
-		return this.replace(a,b,"g");
-	});
 String.defineFunctionString("startsWithList",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
