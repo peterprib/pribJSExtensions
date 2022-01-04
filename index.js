@@ -1,7 +1,7 @@
 /*eslint-env browser, amd, node*/
 
 /*
- * Copyright (C) 2016 Jaroslav Peter Prib
+ * Copyright (C) 2016-2021 Jaroslav Peter Prib
  * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -24,7 +24,7 @@ else
 	Object.defineProperty(Object.prototype, "defineFunction", {
 			enumerable: false
 			,value: function(o,p,f) {
-					console.log("pribJSExtentions loading "+p+" for "+o.name );
+//					console.log("pribJSExtentions loading "+p+" for "+o.name );
 					if(o.hasOwnProperty(p))
 						console.warn("Object.prototype."+p+" already defined for "+o.name);
 					else
@@ -38,12 +38,11 @@ if(Object.prototype.defineFunctionString)
 	console.warn("String.prototype.defineFunctionString already defined");
 else
 	Object.prototype.defineFunctionString = function(p,f) { 
-			console.log("pribJSExtentions loading "+p+" for string");
+//			console.log("pribJSExtentions loading "+p+" for string");
 			if(String.prototype.hasOwnProperty(p))
 				console.warn("String.prototype."+p+" already defined");
 			String.prototype[p]=f;
 		};
-console.log("pribJSExtentions defining Array extensions");
 Object.defineFunction(Array, "areEqual", function(l,r,t,f,o) {
 		var a = (this[l]==this[r]);
 		if(t) {
@@ -124,7 +123,6 @@ Object.defineFunction(Array ,"toRatios", function() {
 		for(var o=[], t=this.sum(), i=0;i<this.length;i++) o[i]=this[i]/t;
 		return o;
 	});
-console.log("pribJSExtentions defining Date extensions");
 Object.defineFunction(Date ,"timeDuration" ,{
 	second : 1000
 	,minute : 1000*60
@@ -134,7 +132,6 @@ Object.defineFunction(Date ,"timeDuration" ,{
 Object.defineFunction(Date ,"days" ,function(toData) {
 		return Math.abs(Math.floor(toData.getTime()/Date.timeDuration.day) -  Math.floor(this.getTime()/Date.timeDuration.day));
 	});
-console.log("pribJSExtentions defining Object extensions");
 Object.defineFunction(Object ,"addPropertyByObjectProperty", function(p,o) {
 		if(o==null) return;
 		this[o[p]]=o;
@@ -145,15 +142,33 @@ Object.defineFunction(Object ,"getConstructorName", function() {
 Object.defineFunction(Object ,"getFunctionName", function() {	
 		return this.name;
 	});
+function deepCopyObject(o) {
+	if(o == null || typeof obj !== "object") return o;
+	if(o instanceof Date) {
+		const r=new Date();
+		r.setTime(obj.getTime());
+		return r;
+	} else if(o instanceof Array) {
+		const r=[],l=o.length;
+		for (let i = 0; i < l; i++)	r[i] = deepCopyObject(o[i]);
+		return r;
+	} else if(o instanceof Object) {
+		const r={};
+		Object.getOwnPropertyNames(o).forEach((p,i, a)=>r[p]=deepCopyObject(a[p]));
+		return r;
+	}
+	throw new Error("unknown type");
+}
+
 Object.defineFunction(Object ,"clone", function() {
-		if(this instanceof String) return new String(this);  
-		if(this instanceof Number) return new Number(this);  
-		if(this instanceof Date) return new Date(this);
-		if(this instanceof Array) var newObj=[];
-		else if(typeof this == "object") var newObj={};
-		else return this;
-		for (var i in this) newObj[i]=this[i]==null?null:this[i].clone();
-		return newObj;
+		return deepCopyObject(this);
+	});
+Object.defineFunction(Object ,"cloneProperties", function(...properties) {
+	const v=this;
+	return properties.reduce((a,p)=>{
+			a[p]=deepCopyObject(v[p]);
+			return a;
+		},{});
 	});
 Object.defineFunction(Object ,"forProperty", function(f,o) {
 		for (var p in this) f.apply(o,[p,this[p]]);
@@ -278,7 +293,7 @@ Object.defineFunction(Object ,"toSimpleArray", function(prefix) {
 				o.push([(prefix||"")+p,this[p],typeof this[p]]);
 		 return o;
 	});
-console.log("pribJSExtentions defining String extensions");
+
 String.defineFunctionString("addSlashes",function() { 
 		return this.replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0");
 	});
@@ -290,7 +305,7 @@ String.defineFunctionString("endsWithList",function () {
 			if(this.substr(-arguments[i].length)==arguments[i]) return true;
 		return false;
 	});
-String.defineFunctionString("endsWith",String.prototype.endsWithList);
+//String.defineFunctionString("endsWith",String.prototype.endsWithList);
 
 String.defineFunctionString("endsWithListAnyCase",function () {
 		for (var i=0; i<arguments.length; i++)
@@ -344,7 +359,7 @@ String.defineFunctionString("startsWithList",function () {
 			if(this.slice(0, arguments[i].length)==arguments[i]) return true;
 		return false;
 	});
-String.defineFunctionString("startsWith",String.prototype.startsWithList);
+//String.defineFunctionString("startsWith",String.prototype.startsWithList);
 String.defineFunctionString("startsWithListAnyCase",function () {
 		for (var i = 0; i < arguments.length; i++)
 			if(this.slice(0, arguments[i].length).toLowerCase()==arguments[i].toLowerCase()) return true;
@@ -426,4 +441,3 @@ try{
 } catch(e) {
 	module.exports = pribJSExtensions;
 }
-

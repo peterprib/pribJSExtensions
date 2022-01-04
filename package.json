@@ -1,25 +1,25 @@
-{ "name": "pribJSExtensions"
-, "description": "Various improvements to base JS"
-,"version": "0.0.1"
-,"main": "index.js"
-,"repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/peterprib/pribJSExtensions.git"
-  }
- ,"keywords": [
+{
+  "name": "pribJSExtensions",
+  "description": "Various improvements to base JS",
+  "version": "0.0.2",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterprib/pribJSExtensions.git"
+  },
+  "keywords": [
     "javascript"
-  ]
-,"author": "Peter Prib"
-,"bugs": "https://github.com/peterprib/pribJSExtensions/issues"
-, "license": "GPL-3.0"
-, "bin": {
+  ],
+  "author": "Peter Prib",
+  "bugs": "https://github.com/peterprib/pribJSExtensions/issues",
+  "license": "GPL-3.0",
+  "bin": {
     "pribJSExtensions": "./index.js"
-  }
-,  "scripts": {
-    "test": "./node_modules/.bin/mocha -R xunit  --reporter-options output=tests/TEST-1.xml"
-  }
-,"devDependencies": {
-    "mocha": "*"
-    ,"chai": "*"
+  },
+  "scripts": {
+    "test": "mocha \"test/*.js\""
+  },
+  "devDependencies": {
+    "mocha": ">=9.1.3"
   }
 }
