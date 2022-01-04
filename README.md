@@ -60,7 +60,7 @@ Object
     hasAllProperties
     inheritsProperties
     isEmpty
-    merge
+    mergeProperties
     mergeEnumerable
     mergeReplace
     mergeReplaceEnumerable
@@ -77,7 +77,6 @@ String
     inListAnyCase
     inListLowerCase
     maxSize
-    replaceAll
     startsWithList
     startsWithListAnyCase
     startsWithAnyCase

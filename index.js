@@ -247,7 +247,7 @@ Object.defineFunction(Object ,"isEmpty", function() {
 			if(this.hasOwnProperty(p)) return false;
 		 return true;
 	});
-Object.defineFunction(Object ,"merge", function(s) {
+Object.defineFunction(Object ,"mergeProperties", function(s) {
 		if(arguments.length>1) {
 			for(var i=1;i<arguments.length;i++) {
 				if(this[arguments[i]]) throw Error("collision with property: "+arguments[i]);
