@@ -143,32 +143,35 @@ Object.defineFunction(Object ,"getFunctionName", function() {
 		return this.name;
 	});
 function deepCopyObject(o) {
-	if(o == null || typeof obj !== "object") return o;
-	if(o instanceof Date) {
-		const r=new Date();
-		r.setTime(obj.getTime());
-		return r;
+	if(o == null || typeof o !== "object") return o;
+	if(o.constructor == Date 
+	|| o.constructor == RegExp 
+	|| o.constructor == Function
+	|| o.constructor == String
+	|| o.constructor == Number
+	|| o.constructor == Boolean) {
+		return new o.constructor(from);
 	} else if(o instanceof Array) {
 		const r=[],l=o.length;
 		for (let i = 0; i < l; i++)	r[i] = deepCopyObject(o[i]);
 		return r;
-	} else if(o instanceof Object) {
+	} else {
 		const r={};
-		Object.getOwnPropertyNames(o).forEach((p,i, a)=>r[p]=deepCopyObject(a[p]));
+		Object.getOwnPropertyNames(o).forEach((p)=>r[p]=deepCopyObject(o[p]));
 		return r;
 	}
 	throw new Error("unknown type");
 }
-
-Object.defineFunction(Object ,"clone", function() {
-		return deepCopyObject(this);
-	});
+	
 Object.defineFunction(Object ,"cloneProperties", function(...properties) {
 	const v=this;
-	return properties.reduce((a,p)=>{
+	return [].concat(...properties).reduce((a,p)=>{
 			a[p]=deepCopyObject(v[p]);
 			return a;
 		},{});
+});
+Object.defineFunction(Object ,"clone", function() {
+		return deepCopyObject(this);
 	});
 Object.defineFunction(Object ,"forProperty", function(f,o) {
 		for (var p in this) f.apply(o,[p,this[p]]);
