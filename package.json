@@ -16,6 +16,9 @@
   "bin": {
     "pribJSExtensions": "./index.js"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "test": "mocha \"test/*.js\""
   },
